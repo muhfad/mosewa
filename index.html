@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="id"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&amp;family=Sora:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}
+/* Smooth Light/Dark transition */
+html, body, header, section, footer, div, a, button {
+  transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
+}
+/* Light Mode — semua latar putih, tanpa biru, kontras teks diperkuat (WCAG AA+) */
+html:not(.dark) {
+  color-scheme: light;
+  background-color: #ffffff !important;
+}
+html:not(.dark) body,
+html:not(.dark) main,
+html:not(.dark) .bg-surface,
+html:not(.dark) section {
+  background-color: #ffffff !important;
+}
+html:not(.dark) body {
+  color: #111827 !important;
+}
+
+/* ---------- Header ---------- */
+html:not(.dark) header {
+  background-color: rgba(255, 255, 255, 0.96) !important;
+  border-bottom-color: #e5e7eb !important;
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.06);
+}
+
+/* ---------- Hero ---------- */
+html:not(.dark) .light-hero-bg {
+  background: #ffffff !important;
+}
+/* Glow / blur dekoratif (termasuk yang biru) disembunyikan */
+html:not(.dark) [class*="blur-["],
+html:not(.dark) .blur-3xl,
+html:not(.dark) .blur-2xl {
+  display: none !important;
+}
+/* Cincin halo di belakang mockup: tanpa isian warna */
+html:not(.dark) .animate-pulse.rounded-full {
+  background: none !important;
+  border-color: #e5e7eb !important;
+}
+/* Judul bergradien: pastikan emas tua yang terbaca di atas putih */
+html:not(.dark) h1 .bg-clip-text {
+  background-image: linear-gradient(to right, #b45309, #92400e, #78350f) !important;
+}
+/* Bayangan foto produk lebih lembut agar tidak kotor di atas putih */
+html:not(.dark) img.object-contain {
+  filter: drop-shadow(0 12px 22px rgba(0, 0, 0, 0.16)) !important;
+}
+
+/* ---------- Permukaan putih ---------- */
+html:not(.dark) .light-surface-lowest {
+  background-color: #ffffff !important;
+  border-color: #e5e7eb !important;
+}
+html:not(.dark) section.light-surface-lowest {
+  border-top: 1px solid #e5e7eb;
+  border-bottom: 1px solid #e5e7eb;
+}
+html:not(.dark) .light-surface-card {
+  background-color: #ffffff !important;
+  background-image: none !important; /* buang gradien navy bawaan (mockup hero & banner CTA) */
+  border-color: #e5e7eb !important;
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.06);
+}
+html:not(.dark) .light-surface-card:hover {
+  border-color: #d1d5db !important;
+  box-shadow: 0 12px 30px -4px rgba(0, 0, 0, 0.12);
+}
+html:not(.dark) .light-card-inner {
+  background-color: #ffffff !important;
+  border-color: #e5e7eb !important;
+}
+html:not(.dark) .light-card-inner > .absolute.inset-0 {
+  display: none !important; /* tint emas saat hover */
+}
+html:not(.dark) .light-footer {
+  background-color: #ffffff !important;
+  border-top-color: #e5e7eb !important;
+}
+
+/* Badge / chip / state aktif: putih + garis emas + teks emas tua */
+html:not(.dark) .light-badge {
+  background-color: #ffffff !important;
+  color: #92400e !important;
+  border: 1px solid #d9a441 !important;
+}
+
+/* Garis pemisah bawaan yang berwarna kebiruan -> abu netral */
+html:not(.dark) [class*="border-surface-variant"],
+html:not(.dark) [class*="border-outline-variant"] {
+  border-color: #e5e7eb !important;
+}
+
+/* ---------- Teks ---------- */
+html:not(.dark) .light-text-main { color: #111827 !important; }
+html:not(.dark) .light-text-sub  { color: #4b5563 !important; }
+html:not(.dark) .light-gold-text,
+html:not(.dark) .light-brand-title { color: #92400e !important; }
+
+/* ---------- Hover tombol sekunder: isi emas + teks gelap ---------- */
+html:not(.dark) a.light-surface-card:hover {
+  background-color: #f6c55f !important;
+  border-color: #d9a441 !important;
+  color: #261900 !important;
+}
+html:not(.dark) a.light-surface-card:hover .light-gold-text {
+  color: #261900 !important;
+}
+
+/* ---------- Tombol emas utama: teks gelap pekat ---------- */
+html:not(.dark) .bg-gradient-to-r.text-on-primary,
+html:not(.dark) .bg-primary-container.text-on-primary {
+  color: #261900 !important;
+}
+</style><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"on-tertiary-fixed":"#241a00","on-error-container":"#ffdad6","error":"#ffb4ab","surface":"#0d112b","secondary-fixed-dim":"#c0c3f2","secondary-container":"#42466e","on-primary-fixed":"#261900","surface-container-low":"#161933","error-container":"#93000a","on-tertiary-fixed-variant":"#56450e","on-surface":"#dfe0ff","on-secondary-fixed":"#14183d","primary-fixed-dim":"#f0bf5a","secondary-fixed":"#dfe0ff","outline-variant":"#4e4636","surface-bright":"#343753","primary-container":"#f6c55f","on-secondary-fixed-variant":"#40446b","inverse-surface":"#dfe0ff","surface-variant":"#2f334e","inverse-primary":"#7a5900","on-primary-container":"#705100","surface-tint":"#f0bf5a","tertiary":"#ffe6a9","primary":"#ffe5b8","tertiary-container":"#e4ca87","on-primary-fixed-variant":"#5c4200","surface-dim":"#0d112b","background":"#0d112b","on-primary":"#402d00","tertiary-fixed":"#fbe09b","on-error":"#690005","on-secondary-container":"#b2b5e4","surface-container-highest":"#2f334e","on-background":"#dfe0ff","inverse-on-surface":"#2b2e49","outline":"#9b8f7d","primary-fixed":"#ffdea2","on-secondary":"#292d53","on-surface-variant":"#d2c5b1","tertiary-fixed-dim":"#dec482","surface-container-high":"#242843","on-tertiary-container":"#67541d","secondary":"#c0c3f2","surface-container":"#1a1e38","surface-container-lowest":"#080c25","on-tertiary":"#3d2f00"},borderRadius:{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},spacing:{"margin-mobile":"1.25rem","space-md":"1rem","margin":"3rem","gutter-mobile":"1rem","gutter":"1.5rem","space-2xl":"4rem","space-lg":"1.5rem","space-xs":"0.25rem","space-xl":"2.5rem","space-sm":"0.5rem"},fontFamily:{"headline-sm":["Sora"],"headline-lg-mobile":["Sora"],"body-md":["Plus Jakarta Sans"],"headline-lg":["Sora"],"headline-md":["Sora"],"body-sm":["Plus Jakarta Sans"],"display-hero":["Sora"],"label-lg":["Plus Jakarta Sans"],"body-lg":["Plus Jakarta Sans"],"display-hero-mobile":["Sora"],"label-md":["Plus Jakarta Sans"],"label-sm":["Plus Jakarta Sans"]},fontSize:{"headline-sm":["20px",{lineHeight:"28px",letterSpacing:"0em",fontWeight:"600"}],"headline-lg-mobile":["28px",{lineHeight:"36px",letterSpacing:"-0.01em",fontWeight:"600"}],"body-md":["15px",{lineHeight:"24px",letterSpacing:"0em",fontWeight:"400"}],"headline-lg":["40px",{lineHeight:"48px",letterSpacing:"-0.02em",fontWeight:"600"}],"headline-md":["24px",{lineHeight:"32px",letterSpacing:"-0.01em",fontWeight:"600"}],"body-sm":["13px",{lineHeight:"20px",letterSpacing:"0em",fontWeight:"400"}],"display-hero":["56px",{lineHeight:"64px",letterSpacing:"-0.03em",fontWeight:"700"}],"label-lg":["14px",{lineHeight:"20px",letterSpacing:"0.02em",fontWeight:"600"}],"body-lg":["18px",{lineHeight:"28px",letterSpacing:"-0.01em",fontWeight:"400"}],"display-hero-mobile":["36px",{lineHeight:"44px",letterSpacing:"-0.02em",fontWeight:"700"}],"label-md":["12px",{lineHeight:"16px",letterSpacing:"0.04em",fontWeight:"600"}],"label-sm":["10px",{lineHeight:"14px",letterSpacing:"0.06em",fontWeight:"700"}]}}}};</script></head><body class="bg-surface font-body-md text-on-surface antialiased"><header class="fixed top-0 left-0 w-full z-50 bg-surface/90 backdrop-blur-xl border-b border-surface-variant/40"><div class="h-20 max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between gap-4"><div class="flex items-center gap-6"><a class="flex items-center gap-3" data-path="beranda" href="#"><span class="font-headline-md text-headline-md tracking-tight text-primary font-bold light-brand-title">MoSewa</span><span class="hidden sm:inline-block font-label-sm text-label-sm tracking-widest text-primary-fixed-dim uppercase bg-surface-container-high px-2 py-0.5 rounded light-badge">Luxury Tech</span></a><div class="hidden xl:flex items-center p-1 bg-surface-container-lowest light-surface-lowest rounded-full border border-surface-variant/30"><button class="px-3 py-1 rounded-full font-label-sm text-label-sm font-semibold bg-surface-container-high text-primary-container shadow-sm light-surface-card light-gold-text" type="button">Yogyakarta</button><button class="px-3 py-1 rounded-full font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface light-text-sub transition-colors" type="button">Jakarta</button></div></div><nav class="hidden lg:flex items-center gap-8" data-active-classes="text-primary-container font-semibold"><a aria-current="page" class="transition-colors text-primary-container font-semibold light-gold-text" data-path="beranda" href="#">Beranda</a><a class="font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface light-text-sub transition-colors" data-path="katalog" href="#">Katalog</a><a class="font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface light-text-sub transition-colors" data-path="cara-sewa" href="#">Cara Sewa</a><a class="font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface light-text-sub transition-colors" data-path="lokasi" href="#">Lokasi Hub</a><a class="font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface light-text-sub transition-colors" data-path="faq" href="#">FAQ</a></nav><div class="flex items-center gap-3 sm:gap-4"><!-- Theme Mode Switcher Toggle Button --><button aria-label="Ganti Tema Tampilan" class="relative inline-flex items-center justify-center w-10 h-10 rounded-full bg-surface-container-high light-surface-card border border-surface-variant/40 text-primary-container light-gold-text hover:scale-105 active:scale-95 transition-all shadow-sm" id="theme-toggle" title="Ganti Tema (Gelap/Terang)" type="button"><span class="material-symbols-outlined text-xl hidden dark:inline-block" id="theme-icon-dark">light_mode</span><span class="material-symbols-outlined text-xl inline-block dark:hidden" id="theme-icon-light">dark_mode</span></button><a class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-primary-fixed to-primary-container text-on-primary font-label-lg text-label-lg font-bold hover:shadow-[0_0_24px_rgba(246,197,95,0.35)] transition-all" data-path="katalog" href="#"><span class="material-symbols-outlined text-lg">chat</span><span class="hidden sm:inline">Sewa Sekarang</span><span class="sm:hidden">Sewa</span></a><div class="pl-2 border-l border-surface-variant/30"><img alt="Profile" class="w-8 h-8 rounded-full object-cover ring-1 ring-primary/30" src="https://lh3.googleusercontent.com/aida/AEtjO1UttWRImC9n18BL1up57Gv4I-aC1VzMugIogL_HsClfGWJWmWuak-Xv7pzbxv5GAtdM9pvsAPoDoem-fpeNsynvHUOPLmIczm9O3dLoEryOdY1nuVduSohmMMVgspWpfLLZPf-gcLnpBsQUJvPXZUugL7NA7yICL1rGE1TTbzbEFOP4wUjs1FjW-iO-S2bInjXjdHpMR7iLXe9vgJMG6fNFBFwD4D4n114-iuweo1a2U4QmyKhJTCukNo8"/></div></div></div></header><main class="w-full pt-20 bg-surface"><div class="flex flex-col w-full">
+<!-- HERO SECTION -->
+<section class="relative w-full overflow-hidden bg-gradient-to-b from-[#02041D] via-surface-container-lowest to-surface light-hero-bg pt-12 pb-24 lg:pt-20 lg:pb-32">
+<!-- Ambient Radial Glows -->
+<div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] bg-primary-container/10 blur-[140px] pointer-events-none rounded-full"></div>
+<div class="absolute -top-10 -right-20 w-[450px] h-[450px] bg-secondary-container/20 blur-[130px] pointer-events-none rounded-full"></div>
+<div class="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+<!-- Left Column: Copy & Value Proposition -->
+<div class="lg:col-span-7 space-y-8 text-left">
+<!-- Eyebrow Badge -->
+<div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-surface-container-high/90 light-badge border border-outline-variant/40 shadow-sm backdrop-blur-md">
+<span class="relative flex h-2.5 w-2.5">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-container opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-primary-container"></span>
+</span>
+<span class="font-label-sm text-label-sm tracking-widest text-primary-fixed-dim uppercase font-bold light-gold-text">
+              PREMIUM IPHONE RENTAL • JOGJA &amp; JAKARTA
+            </span>
+</div>
+<!-- Headline -->
+<h1 class="font-display-hero text-headline-lg lg:text-display-hero text-on-surface light-text-main font-extrabold tracking-tight leading-none text-balance">
+            Sewa iPhone Impianmu, <br/>
+<span class="bg-gradient-to-r from-primary-fixed via-primary-container to-tertiary bg-clip-text text-transparent dark:from-primary-fixed dark:via-primary-container dark:to-tertiary from-amber-600 via-amber-500 to-amber-700">
+              Lebih Mudah di MoSewa.
+            </span>
+</h1>
+<!-- Subheadline -->
+<p class="font-body-lg text-body-lg text-on-surface-variant light-text-sub max-w-2xl leading-relaxed">
+            Nikmati pengalaman menggunakan iPhone flagship terbaru tanpa harus membeli. Pilih unit, tentukan durasi harian hingga mingguan, dan sewa dengan praktis di Jogja &amp; Jakarta.
+          </p>
+<!-- Action Buttons -->
+<div class="flex flex-wrap items-center gap-4 pt-2">
+<a class="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-gradient-to-r from-primary-fixed via-primary-container to-tertiary-container text-on-primary font-label-lg text-label-lg font-bold shadow-[0_0_30px_rgba(246,197,95,0.3)] hover:shadow-[0_0_40px_rgba(246,197,95,0.5)] hover:scale-[1.02] active:scale-[0.98] transition-all" href="#katalog">
+<span class="">Jelajahi Katalog</span>
+<span class="material-symbols-outlined text-lg">arrow_forward</span>
+</a>
+<a class="inline-flex items-center gap-2 px-7 py-4 rounded-full bg-surface-container-high/80 light-surface-card text-on-surface light-text-main font-label-lg text-label-lg font-semibold border border-outline-variant/50 hover:border-primary-container/60 hover:text-primary transition-all" href="#cara-sewa">
+<span class="material-symbols-outlined text-base text-primary-container light-gold-text">route</span>
+<span class="">Cara Sewa (3 Langkah)</span>
+</a>
+</div>
+<!-- Trust Badges Strip -->
+<div class="pt-6 grid grid-cols-2 sm:grid-cols-4 gap-4 border-t border-surface-variant/40">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-container light-gold-text text-xl" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant light-text-sub">100% Original Apple</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-container light-gold-text text-xl" style="font-variation-settings: 'FILL' 1;">battery_charging_full</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant light-text-sub">Battery Health &gt;90%</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-container light-gold-text text-xl" style="font-variation-settings: 'FILL' 1;">local_shipping</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant light-text-sub">Pickup / Instant Delivery</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-container light-gold-text text-xl" style="font-variation-settings: 'FILL' 1;">published_with_changes</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant light-text-sub">Garansi Ganti Unit</span>
+</div>
+</div>
+</div>
+<!-- Right Column: Visual Showcase -->
+<div class="lg:col-span-5 relative flex justify-center items-center">
+<!-- Subtle Halo Ring -->
+<div class="absolute w-[360px] h-[360px] sm:w-[440px] sm:h-[440px] rounded-full bg-gradient-to-tr from-primary-container/20 via-transparent to-primary/10 border border-primary-container/15 animate-pulse"></div>
+<!-- Device Mockup Card Canvas -->
+<div class="relative w-full max-w-[420px] aspect-[4/5] rounded-2xl p-4 bg-gradient-to-b from-surface-container-high/60 to-surface-container-lowest/90 light-surface-card backdrop-blur-xl border border-surface-variant/40 shadow-2xl flex flex-col items-center justify-between overflow-hidden">
+<!-- Top Tag -->
+<div class="w-full flex items-center justify-between z-10 px-2 pt-2">
+<span class="font-label-sm text-label-sm px-2.5 py-1 rounded-full bg-surface-container-highest/80 light-badge text-primary light-gold-text font-medium tracking-wide">
+                Flagship Showcase
+              </span>
+<span class="font-label-sm text-label-sm text-on-surface-variant/70 light-text-sub flex items-center gap-1">
+<span class="material-symbols-outlined text-xs text-primary-container light-gold-text">location_on</span> Hub JOG &amp; JKT
+              </span>
+</div>
+<!-- iPhone Hero Photo -->
+<div class="relative w-full h-[320px] my-auto flex items-center justify-center">
+<img class="w-full h-full object-contain filter drop-shadow-[0_20px_40px_rgba(0,0,0,0.8)]" data-alt="Editorial close-up studio shot of two flagship Apple iPhone 16 Pro in Natural Titanium standing elegantly on a black polished reflective glass pedestal against a dark midnight navy blue background. Warm rim lighting accents the camera lenses and titanium edges with champagne gold reflections." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAoOiv7CygckigJTo69WXRxqWwohx4c6SSFPfPye4VTUj4H2cZk4hMGQPdU6M9pExQ_Qf144JPaG6QN3koc7Ms17aSA1N5ZalFoU_OgciA993SFoBYqgOlEyXa7A7tstrnv3Zq5zCObSa-s-zlOSsbwbuAOVYg9uTI3-WLgTMiB2dMyq2Sxqq-nALMgQhMOGWfyq3wnOnG1rraFcmZWjZMXU9jHjE9id_T5QrEfWus"/>
+</div>
+<!-- Floating Overlay Card -->
+<div class="w-full z-10 p-3.5 rounded-xl bg-surface-container-lowest/80 light-surface-card backdrop-blur-md border border-primary-container/30 shadow-lg flex items-center justify-between">
+<div class="space-y-0.5">
+<p class="font-label-md text-label-md text-on-surface light-text-main font-semibold">iPhone 16 Pro Max</p>
+<p class="font-label-sm text-label-sm text-primary-fixed-dim light-gold-text">Natural Titanium • 256GB</p>
+</div>
+<div class="text-right">
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded bg-primary-container/20 light-badge text-primary-container light-gold-text font-bold">
+                  Ready Unit
+                </span>
+<p class="font-label-sm text-label-sm text-on-surface-variant light-text-sub mt-0.5">Mulai Rp 295k/hr</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- LOCATION & QUICK FILTER SELECTOR BAR -->
+<section class="w-full bg-surface-container-lowest/90 light-surface-lowest border-y border-surface-variant/30 py-6 sticky top-20 z-40 backdrop-blur-xl">
+<div class="max-w-7xl mx-auto px-6 lg:px-12 flex flex-col md:flex-row items-center justify-between gap-4">
+<!-- City Switcher -->
+<div class="flex items-center p-1 bg-surface-container light-surface-card rounded-full border border-surface-variant/40 w-full sm:w-auto">
+<button class="flex-1 sm:flex-none px-4 py-2 rounded-full font-label-md text-label-md font-semibold bg-surface-container-high text-primary-container light-badge shadow-sm flex items-center justify-center gap-1.5 transition-colors" id="loc-all">
+<span class="material-symbols-outlined text-sm">hub</span>
+<span class="">Semua Cabang</span>
+</button>
+<button class="flex-1 sm:flex-none px-4 py-2 rounded-full font-label-md text-label-md text-on-surface-variant hover:text-on-surface light-text-sub flex items-center justify-center gap-1.5 transition-colors" id="loc-jog">
+<span class="material-symbols-outlined text-sm">location_on</span>
+<span class="">Yogyakarta (Sleman &amp; Kota)</span>
+</button>
+<button class="flex-1 sm:flex-none px-4 py-2 rounded-full font-label-md text-label-md text-on-surface-variant hover:text-on-surface light-text-sub flex items-center justify-center gap-1.5 transition-colors" id="loc-jkt">
+<span class="material-symbols-outlined text-sm">apartment</span>
+<span class="">Jakarta (Jaksel &amp; Jakpus)</span>
+</button>
+</div>
+<!-- Purpose Selector -->
+<div class="flex items-center gap-2 overflow-x-auto w-full md:w-auto pb-1 md:pb-0 scrollbar-none text-nowrap">
+<span class="font-label-sm text-label-sm text-on-surface-variant light-text-sub uppercase tracking-wider hidden xl:inline-block mr-1">Tipe:</span>
+<button class="px-3.5 py-1.5 rounded-full font-label-sm text-label-sm bg-primary-container/15 light-badge text-primary-container light-gold-text border border-primary-container/40 font-semibold">Harian</button>
+<button class="px-3.5 py-1.5 rounded-full font-label-sm text-label-sm bg-surface-container light-surface-card text-on-surface-variant hover:text-on-surface light-text-sub border border-surface-variant/30">Mingguan</button>
+<button class="px-3.5 py-1.5 rounded-full font-label-sm text-label-sm bg-surface-container light-surface-card text-on-surface-variant hover:text-on-surface light-text-sub border border-surface-variant/30">Event / Liburan</button>
+<button class="px-3.5 py-1.5 rounded-full font-label-sm text-label-sm bg-surface-container light-surface-card text-on-surface-variant hover:text-on-surface light-text-sub border border-surface-variant/30">Content Creation</button>
+</div>
+</div>
+</section>
+<!-- SECTION: BENEFIT / WHY MOSEWA -->
+<section class="w-full py-24 bg-surface relative">
+<div class="max-w-7xl mx-auto px-6 lg:px-12">
+<!-- Section Header -->
+<div class="max-w-3xl space-y-4 mb-16">
+<div class="inline-flex items-center gap-2 text-primary-container light-gold-text font-label-sm text-label-sm tracking-wider uppercase font-bold">
+<span class="material-symbols-outlined text-base">award_star</span>
+<span class="">Keunggulan MoSewa Concierge</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface light-text-main font-bold tracking-tight">
+          Pengalaman Sewa iPhone yang Lebih Praktis, Nyaman, dan Terpercaya.
+        </h2>
+<p class="font-body-md text-body-md text-on-surface-variant light-text-sub">
+          Standar layanan premium kami menjamin kepuasan perangkat dan kelancaran momen berharga Anda dari awal pemesanan hingga selesai pemakaian.
+        </p>
+</div>
+<!-- Benefit 4 Cards Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Benefit 1 -->
+<div class="p-8 rounded-2xl bg-surface-container-low/70 light-surface-card border border-surface-variant/30 hover:border-primary-container/40 transition-all hover:-translate-y-1 shadow-md flex flex-col justify-between group">
+<div class="space-y-4">
+<div class="w-12 h-12 rounded-xl bg-surface-container-high light-card-inner flex items-center justify-center text-primary-container light-gold-text border border-surface-variant/40 group-hover:bg-primary-container group-hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined text-2xl">verified_user</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface light-text-main font-semibold">Unit Flagship Terawat &amp; Steril</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant light-text-sub leading-relaxed">
+              iPhone 13 hingga 16 Pro Max dalam kondisi fisik mulus 99%, baterai sehat, iCloud clean, lengkap screen guard dan case original.
+            </p>
+</div>
+<div class="pt-6 font-label-sm text-label-sm text-primary-fixed-dim light-gold-text flex items-center gap-1 font-medium">
+<span class="">Standar QC 18 Poin</span>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+</div>
+</div>
+<!-- Benefit 2 -->
+<div class="p-8 rounded-2xl bg-surface-container-low/70 light-surface-card border border-surface-variant/30 hover:border-primary-container/40 transition-all hover:-translate-y-1 shadow-md flex flex-col justify-between group">
+<div class="space-y-4">
+<div class="w-12 h-12 rounded-xl bg-surface-container-high light-card-inner flex items-center justify-center text-primary-container light-gold-text border border-surface-variant/40 group-hover:bg-primary-container group-hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined text-2xl">calendar_month</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface light-text-main font-semibold">Durasi Fleksibel &amp; Transparan</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant light-text-sub leading-relaxed">
+              Pilihan sewa 24 jam, paket 3 hari liburan, mingguan, atau bulanan korporat. Biaya transparan tanpa embel-embel tersembunyi.
+            </p>
+</div>
+<div class="pt-6 font-label-sm text-label-sm text-primary-fixed-dim light-gold-text flex items-center gap-1 font-medium">
+<span class="">Perpanjangan Mudah</span>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+</div>
+</div>
+<!-- Benefit 3 -->
+<div class="p-8 rounded-2xl bg-surface-container-low/70 light-surface-card border border-surface-variant/30 hover:border-primary-container/40 transition-all hover:-translate-y-1 shadow-md flex flex-col justify-between group">
+<div class="space-y-4">
+<div class="w-12 h-12 rounded-xl bg-surface-container-high light-card-inner flex items-center justify-center text-primary-container light-gold-text border border-surface-variant/40 group-hover:bg-primary-container group-hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined text-2xl">quickreply</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface light-text-main font-semibold">Proses Cepat via WhatsApp</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant light-text-sub leading-relaxed">
+              Verifikasi identitas ringkas, anti-ribet, dibantu admin responsif dalam hitungan 5–10 menit untuk reservasi instan.
+            </p>
+</div>
+<div class="pt-6 font-label-sm text-label-sm text-primary-fixed-dim light-gold-text flex items-center gap-1 font-medium">
+<span class="">Fast-track Booking</span>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+</div>
+</div>
+<!-- Benefit 4 -->
+<div class="p-8 rounded-2xl bg-surface-container-low/70 light-surface-card border border-surface-variant/30 hover:border-primary-container/40 transition-all hover:-translate-y-1 shadow-md flex flex-col justify-between group">
+<div class="space-y-4">
+<div class="w-12 h-12 rounded-xl bg-surface-container-high light-card-inner flex items-center justify-center text-primary-container light-gold-text border border-surface-variant/40 group-hover:bg-primary-container group-hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined text-2xl">location_city</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface light-text-main font-semibold">Hub Resmi Jogja &amp; Jakarta</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant light-text-sub leading-relaxed">
+              Layanan pickup mandiri di hub strategis atau antar-jemput kurir instan langsung ke hotel, stasiun, kantor, atau rumah Anda.
+            </p>
+</div>
+<div class="pt-6 font-label-sm text-label-sm text-primary-fixed-dim light-gold-text flex items-center gap-1 font-medium">
+<span class="">Delivery Doorstep</span>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION: FEATURED CATALOG -->
+<section class="w-full py-24 bg-surface-container-lowest light-surface-lowest relative" id="katalog">
+<div class="max-w-7xl mx-auto px-6 lg:px-12">
+<!-- Section Header & Filter Tabs -->
+<div class="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-14">
+<div class="space-y-3 max-w-2xl">
+<span class="font-label-sm text-label-sm tracking-widest text-primary-container light-gold-text uppercase font-bold">Koleksi Flagship MoSewa</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface light-text-main font-bold tracking-tight">Temukan iPhone Favoritmu</h2>
+<p class="font-body-md text-body-md text-on-surface-variant light-text-sub">Pilihan perangkat paling mutakhir dengan kondisi prima siap rekam momentum berhargamu.</p>
+</div>
+<!-- Filter Pill Tabs -->
+<div class="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
+<button class="px-4 py-2 rounded-full font-label-sm text-label-sm bg-primary-container text-on-primary font-bold shadow-md">Semua</button>
+<button class="px-4 py-2 rounded-full font-label-sm text-label-sm bg-surface-container-high light-surface-card text-on-surface-variant hover:text-on-surface light-text-sub transition-colors border border-surface-variant/30">iPhone 16 Series</button>
+<button class="px-4 py-2 rounded-full font-label-sm text-label-sm bg-surface-container-high light-surface-card text-on-surface-variant hover:text-on-surface light-text-sub transition-colors border border-surface-variant/30">iPhone 15 Pro / Max</button>
+<button class="px-4 py-2 rounded-full font-label-sm text-label-sm bg-surface-container-high light-surface-card text-on-surface-variant hover:text-on-surface light-text-sub transition-colors border border-surface-variant/30">iPhone 14 / 13</button>
+<button class="px-4 py-2 rounded-full font-label-sm text-label-sm bg-surface-container-high light-surface-card text-on-surface-variant hover:text-on-surface light-text-sub transition-colors border border-surface-variant/30">Kamera Cinematic</button>
+</div>
+</div>
+<!-- 4 High End Product Cards Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Card 1: 16 Pro Max -->
+<div class="p-6 rounded-2xl bg-surface-container-low light-surface-card border border-surface-variant/30 hover:border-primary-container/50 transition-all duration-300 hover:shadow-[0_12px_40px_rgba(0,0,0,0.6)] flex flex-col justify-between group">
+<div class="space-y-4">
+<!-- Top Status Badges -->
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm px-2.5 py-1 rounded-full bg-primary-container/20 light-badge text-primary-container light-gold-text font-semibold">
+                Ready Jogja &amp; Jakarta
+              </span>
+<span class="font-label-sm text-label-sm text-on-surface-variant light-text-sub">256 GB</span>
+</div>
+<!-- Image Frame -->
+<div class="w-full h-56 rounded-xl bg-surface-container-lowest/80 light-card-inner flex items-center justify-center p-4 relative overflow-hidden group-hover:scale-105 transition-transform duration-500">
+<div class="absolute inset-0 bg-gradient-to-t from-primary-container/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<img class="h-full w-auto object-contain drop-shadow-[0_10px_20px_rgba(0,0,0,0.6)]" data-alt="Editorial product photo of Apple iPhone 16 Pro Max Desert Titanium angle view showing triple camera system, brushed titanium edge, on deep midnight navy background with subtle warm gold lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAbVcrInubHyhS_pGq4I2iEgCkKAT3vKapO4Wwgw0CnHz4qgvMBaYvblmCUefiWy92pGQQIQ1D6pU-95KTqIG5ienpUe3AZgZw-0e_QpJByyRuWRsRqXWNzgMLE-1eh53Defvfw1-DQxRB5JBv9Cj9fGvWwA1Y8pjYorZTEF8S4FQYjKO3hfL0h7mX79lsEm8fpaA_HFRtASMWMzrnQjXOnkqxbHohwaIosFmxwJ5A"/>
+</div>
+<!-- Details -->
+<div>
+<p class="font-label-sm text-label-sm text-primary-fixed-dim light-gold-text uppercase tracking-wider font-semibold">Desert Titanium</p>
+<h3 class="font-headline-sm text-headline-sm text-on-surface light-text-main font-bold mt-1">iPhone 16 Pro Max</h3>
+</div>
+<!-- Specs Chips -->
+<div class="space-y-1.5 pt-2 text-xs text-on-surface-variant light-text-sub">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sm text-primary-container light-gold-text">videocam</span>
+<span class="">4K 120fps Dolby Vision &amp; ProRes</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sm text-primary-container light-gold-text">touch_app</span>
+<span class="">Action Button &amp; Camera Control</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sm text-primary-container light-gold-text">zoom_in</span>
+<span class="">5x Telephoto Optical Zoom</span>
+</div>
+</div>
+</div>
+<!-- Price & CTA -->
+<div class="pt-6 border-t border-surface-variant/30 mt-6">
+<div class="mb-3">
+<span class="font-headline-sm text-headline-sm font-bold text-on-surface light-text-main">Rp 295.000</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant light-text-sub"> / hari</span>
+</div>
+<a class="w-full inline-flex items-center justify-center gap-2 py-3 rounded-xl bg-gradient-to-r from-primary-fixed to-primary-container text-on-primary font-label-sm text-label-sm font-bold hover:shadow-[0_0_20px_rgba(246,197,95,0.3)] transition-all" href="https://wa.me/6281234567890?text=Halo%20MoSewa,%20saya%20ingin%20sewa%20iPhone%2016%20Pro%20Max%20Desert%20Titanium" target="_blank">
+<span class="">Lihat Detail &amp; Sewa</span>
+<span class="material-symbols-outlined text-base">chat</span>
+</a>
+</div>
+</div>
+<!-- Card 2: 16 Pro -->
+<div class="p-6 rounded-2xl bg-surface-container-low light-surface-card border border-surface-variant/30 hover:border-primary-container/50 transition-all duration-300 hover:shadow-[0_12px_40px_rgba(0,0,0,0.6)] flex flex-col justify-between group">
+<div class="space-y-4">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm px-2.5 py-1 rounded-full bg-surface-container-high light-card-inner text-primary-fixed-dim light-gold-text font-semibold">
+                Ready Jogja
+              </span>
+<span class="font-label-sm text-label-sm text-on-surface-variant light-text-sub">128 GB</span>
+</div>
+<div class="w-full h-56 rounded-xl bg-surface-container-lowest/80 light-card-inner flex items-center justify-center p-4 relative overflow-hidden group-hover:scale-105 transition-transform duration-500">
+<div class="absolute inset-0 bg-gradient-to-t from-primary-container/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<img class="h-full w-auto object-contain drop-shadow-[0_10px_20px_rgba(0,0,0,0.6)]" data-alt="Studio showcase of Apple iPhone 16 Pro Black Titanium standing against dark nocturnal navy background with soft metallic sheen highlighting sleek micro-blasted grade 5 titanium chassis." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDbBCEEQd-DIdBlD_ke-2gEcDD0-vv8iCszb5KPI3TlwVIHNpUyGjGmNAxL9RshtnhjQwi4xJm0YHjhUp6xxQ5ba0oyOLp9qTzn-GyaAWxGJOXS0n0CTTCTagSD2bqmgk4eD1MkwciVKTJ7p3PI_doz8Cm3T4eQXVhYNoJh6Io3EzuDexV91n-H578malv_KUafU6OWf5o0wdJHPnNUqbZXDNc-OD4bv8C03QMOvwk"/>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-primary-fixed-dim light-gold-text uppercase tracking-wider font-semibold">Black Titanium</p>
+<h3 class="font-headline-sm text-headline-sm text-on-surface light-text-main font-bold mt-1">iPhone 16 Pro</h3>
+</div>
+<div class="space-y-1.5 pt-2 text-xs text-on-surface-variant light-text-sub">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sm text-primary-container light-gold-text">camera_alt</span>
+<span class="">Camera Control Haptic Sensor</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sm text-primary-container light-gold-text">memory</span>
+<span class="">A18 Pro Next-gen Silicon</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sm text-primary-container light-gold-text">battery_std</span>
+<span class="">Battery Up to 27 Jam Playback</span>
+</div>
+</div>
+</div>
+<div class="pt-6 border-t border-surface-variant/30 mt-6">
+<div class="mb-3">
+<span class="font-headline-sm text-headline-sm font-bold text-on-surface light-text-main">Rp 245.000</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant light-text-sub"> / hari</span>
+</div>
+<a class="w-full inline-flex items-center justify-center gap-2 py-3 rounded-xl bg-surface-container-high light-surface-card hover:bg-primary-container hover:text-on-primary text-on-surface light-text-main font-label-sm text-label-sm font-bold border border-surface-variant/40 transition-all" href="https://wa.me/6281234567890?text=Halo%20MoSewa,%20saya%20ingin%20sewa%20iPhone%2016%20Pro%20Black%20Titanium" target="_blank">
+<span class="">Lihat Detail &amp; Sewa</span>
+<span class="material-symbols-outlined text-base">chat</span>
+</a>
+</div>
+</div>
+<!-- Card 3: 15 Pro Max -->
+<div class="p-6 rounded-2xl bg-surface-container-low light-surface-card border border-surface-variant/30 hover:border-primary-container/50 transition-all duration-300 hover:shadow-[0_12px_40px_rgba(0,0,0,0.6)] flex flex-col justify-between group">
+<div class="space-y-4">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm px-2.5 py-1 rounded-full bg-surface-container-high light-card-inner text-primary-fixed-dim light-gold-text font-semibold">
+                Ready Jakarta
+              </span>
+<span class="font-label-sm text-label-sm text-on-surface-variant light-text-sub">256 GB</span>
+</div>
+<div class="w-full h-56 rounded-xl bg-surface-container-lowest/80 light-card-inner flex items-center justify-center p-4 relative overflow-hidden group-hover:scale-105 transition-transform duration-500">
+<div class="absolute inset-0 bg-gradient-to-t from-primary-container/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<img class="h-full w-auto object-contain drop-shadow-[0_10px_20px_rgba(0,0,0,0.6)]" data-alt="Sleek product shot of Apple iPhone 15 Pro Max Natural Titanium, sharp perspective showing the brushed satin titanium frame and frosted glass back, luxury studio lighting on dark background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAvJRXx6wq1t5ZbiF851Z7dpv3s5Mxt8i84r0JKY9sg3ynIE_bdXFMfVZ6Sd9hsCTUzFEPbSAZAsXBvP6qSZcSLcCHDUnt_7e2EsP3TLbwxH-NVZyEUBRO1KvvhCxiK5_gtRmeAJwIsjRp593ubqhXwUEaDMfwqzSgj4lX2-T8xNdJJzePgPrzzOg630or99xAdCrS_TuB-0pOraoSMphA06vo9RuJCMFDEcTEAC34"/>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-primary-fixed-dim light-gold-text uppercase tracking-wider font-semibold">Natural Titanium</p>
+<h3 class="font-headline-sm text-headline-sm text-on-surface light-text-main font-bold mt-1">iPhone 15 Pro Max</h3>
+</div>
+<div class="space-y-1.5 pt-2 text-xs text-on-surface-variant light-text-sub">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sm text-primary-container light-gold-text">photo_camera</span>
+<span class="">48MP Main Camera + 5x Telephoto</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sm text-primary-container light-gold-text">cable</span>
+<span class="">USB-C 3 Transfer Speed</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sm text-primary-container light-gold-text">shield</span>
+<span class="">Ceramic Shield Depan Tahan Gores</span>
+</div>
+</div>
+</div>
+<div class="pt-6 border-t border-surface-variant/30 mt-6">
+<div class="mb-3">
+<span class="font-headline-sm text-headline-sm font-bold text-on-surface light-text-main">Rp 210.000</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant light-text-sub"> / hari</span>
+</div>
+<a class="w-full inline-flex items-center justify-center gap-2 py-3 rounded-xl bg-surface-container-high light-surface-card hover:bg-primary-container hover:text-on-primary text-on-surface light-text-main font-label-sm text-label-sm font-bold border border-surface-variant/40 transition-all" href="https://wa.me/6281234567890?text=Halo%20MoSewa,%20saya%20ingin%20sewa%20iPhone%2015%20Pro%20Max%20Natural%20Titanium" target="_blank">
+<span class="">Lihat Detail &amp; Sewa</span>
+<span class="material-symbols-outlined text-base">chat</span>
+</a>
+</div>
+</div>
+<!-- Card 4: iPhone 15 -->
+<div class="p-6 rounded-2xl bg-surface-container-low light-surface-card border border-surface-variant/30 hover:border-primary-container/50 transition-all duration-300 hover:shadow-[0_12px_40px_rgba(0,0,0,0.6)] flex flex-col justify-between group">
+<div class="space-y-4">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm px-2.5 py-1 rounded-full bg-primary-container/20 light-badge text-primary-container light-gold-text font-semibold">
+                Ready Jogja &amp; Jakarta
+              </span>
+<span class="font-label-sm text-label-sm text-on-surface-variant light-text-sub">128 GB</span>
+</div>
+<div class="w-full h-56 rounded-xl bg-surface-container-lowest/80 light-card-inner flex items-center justify-center p-4 relative overflow-hidden group-hover:scale-105 transition-transform duration-500">
+<div class="absolute inset-0 bg-gradient-to-t from-primary-container/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<img class="h-full w-auto object-contain drop-shadow-[0_10px_20px_rgba(0,0,0,0.6)]" data-alt="Editorial product render of Apple iPhone 15 in soft pastel Pink and Blue colorway on midnight deep blue pedestal, crisp minimalist lighting showing color-infused back glass." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBTOEi6KxwLbM_CENR_lyvceh9JaFJDcmBKyTK7gIYLzoPKKGQwdtsUIWnSSYA8Uvd0hINgvvNkVDaKLBco6AVBKVSi7s5rSECgfW6NPiHkZl5bAMDxDKsMaqssq9AOZ5ZAEVHbAUJsdUJlhMDHdYPhJhh23Rz8Mbkk4Dus4CiJDSt89Rz-tbBDcJ8DYf28nlTxF96VaO34hHxoWpaZEjFHuN9AzOBPNIJh3W0X5P0"/>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-primary-fixed-dim light-gold-text uppercase tracking-wider font-semibold">Pink / Blue / Black</p>
+<h3 class="font-headline-sm text-headline-sm text-on-surface light-text-main font-bold mt-1">iPhone 15 Standard</h3>
+</div>
+<div class="space-y-1.5 pt-2 text-xs text-on-surface-variant light-text-sub">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sm text-primary-container light-gold-text">widgets</span>
+<span class="">Dynamic Island Interaktif</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sm text-primary-container light-gold-text">camera</span>
+<span class="">Sensor 48MP Resolusi Ekstra Tinggi</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sm text-primary-container light-gold-text">speed</span>
+<span class="">A16 Bionic Super Responsif</span>
+</div>
+</div>
+</div>
+<div class="pt-6 border-t border-surface-variant/30 mt-6">
+<div class="mb-3">
+<span class="font-headline-sm text-headline-sm font-bold text-on-surface light-text-main">Rp 140.000</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant light-text-sub"> / hari</span>
+</div>
+<a class="w-full inline-flex items-center justify-center gap-2 py-3 rounded-xl bg-surface-container-high light-surface-card hover:bg-primary-container hover:text-on-primary text-on-surface light-text-main font-label-sm text-label-sm font-bold border border-surface-variant/40 transition-all" href="https://wa.me/6281234567890?text=Halo%20MoSewa,%20saya%20ingin%20sewa%20iPhone%2015" target="_blank">
+<span class="">Lihat Detail &amp; Sewa</span>
+<span class="material-symbols-outlined text-base">chat</span>
+</a>
+</div>
+</div>
+</div>
+<!-- Disclaimer & Pricing Note -->
+<div class="mt-8 p-4 rounded-xl bg-surface-container/60 light-surface-card border border-surface-variant/30 flex items-center justify-between flex-wrap gap-4 text-xs text-on-surface-variant light-text-sub">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-container light-gold-text text-base">info</span>
+<span class="">*Estimasi harga sewa harian. Setiap unit sewa sudah termasuk box, kabel original Type-C/Lightning, adaptor fast-charging, dan clear case anti-shock.</span>
+</div>
+<a class="text-primary light-gold-text hover:underline font-semibold flex items-center gap-1" href="https://wa.me/6281234567890" target="_blank">
+          Konsultasi Paket Mingguan &amp; Event
+          <span class="material-symbols-outlined text-xs">arrow_forward</span>
+</a>
+</div>
+</div>
+</section>
+<!-- SECTION: HOW TO RENT (3 STEPS) -->
+<section class="w-full py-24 bg-surface relative" id="cara-sewa">
+<div class="max-w-7xl mx-auto px-6 lg:px-12">
+<div class="text-center max-w-2xl mx-auto mb-16 space-y-3">
+<span class="font-label-sm text-label-sm tracking-widest text-primary-container light-gold-text uppercase font-bold">Proses Concierge Instan</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface light-text-main font-bold tracking-tight">Cuma 3 Langkah untuk Sewa iPhone</h2>
+<p class="font-body-md text-body-md text-on-surface-variant light-text-sub">Tanpa birokrasi rumit. Hubungi kami, verifikasi cepat, dan unit siap digunakan di hari yang sama.</p>
+</div>
+<!-- Step Cards -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
+<!-- Step 1 -->
+<div class="p-8 rounded-2xl bg-surface-container-low light-surface-card border border-surface-variant/30 relative flex flex-col justify-between">
+<div class="space-y-4">
+<span class="font-display-hero text-headline-lg text-primary-container/30 light-gold-text font-bold block leading-none">01</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface light-text-main font-semibold">Pilih iPhone &amp; Lokasi</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant light-text-sub leading-relaxed">
+              Tentukan model favoritmu (iPhone 13 hingga 16 Pro Max), kapasitas penyimpanan, dan cabang yang kamu tuju (Yogyakarta atau Jakarta).
+            </p>
+</div>
+<div class="mt-6 pt-4 border-t border-surface-variant/20 flex items-center gap-2 text-xs text-primary-fixed-dim light-gold-text font-medium">
+<span class="material-symbols-outlined text-sm">phone_iphone</span>
+<span class="">Katalog Lengkap &amp; Update Real-time</span>
+</div>
+</div>
+<!-- Step 2 -->
+<div class="p-8 rounded-2xl bg-surface-container-low light-surface-card border border-surface-variant/30 relative flex flex-col justify-between">
+<div class="space-y-4">
+<span class="font-display-hero text-headline-lg text-primary-container/30 light-gold-text font-bold block leading-none">02</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface light-text-main font-semibold">Tentukan Durasi Sewa</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant light-text-sub leading-relaxed">
+              Atur tanggal mulai dan durasi yang kamu butuhkan. Mulai dari paket harian 24 jam, liburan 3 hari, hingga paket mingguan dengan tarif spesial.
+            </p>
+</div>
+<div class="mt-6 pt-4 border-t border-surface-variant/20 flex items-center gap-2 text-xs text-primary-fixed-dim light-gold-text font-medium">
+<span class="material-symbols-outlined text-sm">schedule</span>
+<span class="">Fleksibel Sesuai Kebutuhan Agendamu</span>
+</div>
+</div>
+<!-- Step 3 -->
+<div class="p-8 rounded-2xl bg-surface-container-low light-surface-card border border-surface-variant/30 relative flex flex-col justify-between">
+<div class="space-y-4">
+<span class="font-display-hero text-headline-lg text-primary-container/30 light-gold-text font-bold block leading-none">03</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface light-text-main font-semibold">Konfirmasi via WhatsApp</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant light-text-sub leading-relaxed">
+              Admin VIP MoSewa langsung memvalidasi identitas secara aman, menyiapkan unit steril, dan mengatur jadwal pickup atau pengantaran ekspres.
+            </p>
+</div>
+<div class="mt-6 pt-4 border-t border-surface-variant/20 flex items-center gap-2 text-xs text-primary-fixed-dim light-gold-text font-medium">
+<span class="material-symbols-outlined text-sm">electric_bolt</span>
+<span class="">Respons Cepat &amp; Handover Profesional</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION: TESTIMONIALS -->
+<section class="w-full py-24 bg-surface-container-lowest light-surface-lowest relative overflow-hidden">
+<div class="max-w-7xl mx-auto px-6 lg:px-12">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
+<div class="space-y-3">
+<span class="font-label-sm text-label-sm tracking-widest text-primary-container light-gold-text uppercase font-bold">Ulasan Komunitas</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface light-text-main font-bold tracking-tight">Apa Kata Pelanggan Kami?</h2>
+<p class="font-body-md text-body-md text-on-surface-variant light-text-sub">Pengalaman nyata dari kreator konten, traveler liburan, hingga profesional di Jogja dan Jakarta.</p>
+</div>
+<!-- Social Proof Stats Mini -->
+<div class="flex items-center gap-4 p-3 rounded-xl bg-surface-container-high/60 light-surface-card border border-surface-variant/30">
+<div class="flex text-primary-container light-gold-text">
+<span class="material-symbols-outlined text-base" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-base" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-base" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-base" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-base" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface light-text-main font-semibold">4.9 / 5.0 dari 850+ Rental</span>
+</div>
+</div>
+<!-- Testimonial Cards Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Review 1 -->
+<div class="p-8 rounded-2xl bg-surface-container-low light-surface-card border border-surface-variant/30 flex flex-col justify-between space-y-6">
+<div class="space-y-4">
+<div class="flex text-primary-container light-gold-text gap-0.5">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface light-text-main leading-relaxed italic">
+              "Sewa iPhone 16 Pro buat konser di Jakarta. Unit mulus 100%, baterai awet seharian dipakai rekam 4K, dan adminnya responsif banget pas minta antar langsung ke hotel dekat venue!"
+            </p>
+</div>
+<div class="flex items-center gap-3 pt-4 border-t border-surface-variant/20">
+<div class="w-10 h-10 rounded-full bg-primary-container/20 light-badge flex items-center justify-center font-bold text-primary-container light-gold-text">
+              AR
+            </div>
+<div>
+<p class="font-label-md text-label-md text-on-surface light-text-main font-bold">Amanda R.</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant light-text-sub">Jakarta Selatan • Konser Musik</p>
+</div>
+</div>
+</div>
+<!-- Review 2 -->
+<div class="p-8 rounded-2xl bg-surface-container-low light-surface-card border border-surface-variant/30 flex flex-col justify-between space-y-6">
+<div class="space-y-4">
+<div class="flex text-primary-container light-gold-text gap-0.5">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface light-text-main leading-relaxed italic">
+              "Nyewa iPhone 15 Pro Max pas liburan 4 hari ke Jogja. Foto-foto Malioboro &amp; Merapi hasilnya jernih cinematic maksimal. Antar jemput ke Stasiun Tugu tepat waktu tanpa ribet."
+            </p>
+</div>
+<div class="flex items-center gap-3 pt-4 border-t border-surface-variant/20">
+<div class="w-10 h-10 rounded-full bg-primary-container/20 light-badge flex items-center justify-center font-bold text-primary-container light-gold-text">
+              DK
+            </div>
+<div>
+<p class="font-label-md text-label-md text-on-surface light-text-main font-bold">Dimas K.</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant light-text-sub">Surabaya • Traveler Yogyakarta</p>
+</div>
+</div>
+</div>
+<!-- Review 3 -->
+<div class="p-8 rounded-2xl bg-surface-container-low light-surface-card border border-surface-variant/30 flex flex-col justify-between space-y-6">
+<div class="space-y-4">
+<div class="flex text-primary-container light-gold-text gap-0.5">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface light-text-main leading-relaxed italic">
+              "Sangat terbantu buat project reels &amp; video company profile kantor. Syarat mudah dan transparan tanpa jaminan berbelit. Bakalan langganan tetap tiap ada event produksi."
+            </p>
+</div>
+<div class="flex items-center gap-3 pt-4 border-t border-surface-variant/20">
+<div class="w-10 h-10 rounded-full bg-primary-container/20 light-badge flex items-center justify-center font-bold text-primary-container light-gold-text">
+              FN
+            </div>
+<div>
+<p class="font-label-md text-label-md text-on-surface light-text-main font-bold">Fakhri N.</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant light-text-sub">Content Creator • Sleman, Jogja</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION: OPERATIONAL HUBS -->
+<section class="w-full py-24 bg-surface relative">
+<div class="max-w-7xl mx-auto px-6 lg:px-12">
+<div class="max-w-2xl mb-16 space-y-3">
+<span class="font-label-sm text-label-sm tracking-widest text-primary-container light-gold-text uppercase font-bold">Jaringan Hub Resmi</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface light-text-main font-bold tracking-tight">Hub MoSewa Yogyakarta &amp; Jakarta</h2>
+<p class="font-body-md text-body-md text-on-surface-variant light-text-sub">Kunjungi pickup center terdekat kami atau manfaatkan kurir concierge ekspres langsung ke alamat Anda.</p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+<!-- Hub Yogyakarta -->
+<div class="p-8 rounded-2xl bg-surface-container-low light-surface-card border border-surface-variant/30 space-y-6 flex flex-col justify-between">
+<div class="space-y-5">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm px-3 py-1 rounded-full bg-primary-container/15 light-badge text-primary-container light-gold-text font-semibold">
+                Hub Wilayah DIY
+              </span>
+<span class="font-label-sm text-label-sm text-on-surface-variant light-text-sub flex items-center gap-1">
+<span class="material-symbols-outlined text-xs text-primary-container light-gold-text">schedule</span> 08.00 - 22.00 WIB
+              </span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface light-text-main font-bold">MoSewa Hub Yogyakarta</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant light-text-sub mt-1">
+                Jl. Kaliurang KM 5 &amp; Area Seturan - Depok, Sleman, D.I. Yogyakarta (Dekat Kampus UGM, UNY &amp; UPN)
+              </p>
+</div>
+<!-- Features -->
+<div class="space-y-2 text-xs text-on-surface-variant light-text-sub">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-container light-gold-text text-base">store</span>
+<span class="">Self Pickup &amp; Demo Unit di Kantor Hub</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-container light-gold-text text-base">delivery_dining</span>
+<span class="">Antar/Jemput Hotel Malioboro, Prawirotaman, Stasiun Tugu, YIA Airport</span>
+</div>
+</div>
+</div>
+<div class="pt-6 border-t border-surface-variant/20 flex flex-wrap items-center justify-between gap-4">
+<a class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-surface-container-high light-surface-card text-on-surface light-text-main hover:text-primary-container light-gold-text border border-surface-variant/40 font-label-sm text-label-sm font-semibold transition-colors" href="https://wa.me/6281234567890?text=Halo%20Admin%20Jogja,%20saya%20mau%20tanya%20sewa%20iPhone" target="_blank">
+<span class="material-symbols-outlined text-base text-primary-container light-gold-text">chat</span>
+<span class="">Hubungi Hub Jogja</span>
+</a>
+<span class="font-label-sm text-label-sm text-primary-fixed-dim light-gold-text">Respons &lt; 5 Menit</span>
+</div>
+</div>
+<!-- Hub Jakarta -->
+<div class="p-8 rounded-2xl bg-surface-container-low light-surface-card border border-surface-variant/30 space-y-6 flex flex-col justify-between">
+<div class="space-y-5">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm px-3 py-1 rounded-full bg-primary-container/15 light-badge text-primary-container light-gold-text font-semibold">
+                Hub Wilayah Jabodetabek
+              </span>
+<span class="font-label-sm text-label-sm text-on-surface-variant light-text-sub flex items-center gap-1">
+<span class="material-symbols-outlined text-xs text-primary-container light-gold-text">schedule</span> 08.00 - 22.00 WIB
+              </span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface light-text-main font-bold">MoSewa Hub Jakarta</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant light-text-sub mt-1">
+                Kawasan Kemang, Jakarta Selatan &amp; Drop Point Tebet / Senayan (SCBD Corridor)
+              </p>
+</div>
+<!-- Features -->
+<div class="space-y-2 text-xs text-on-surface-variant light-text-sub">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-container light-gold-text text-base">directions_car</span>
+<span class="">VIP Courier Same-Day Delivery se-Jabodetabek</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-container light-gold-text text-base">stadium</span>
+<span class="">Handover Langsung Area Konser (GBK Senayan, ICE BSD, JIEXPO)</span>
+</div>
+</div>
+</div>
+<div class="pt-6 border-t border-surface-variant/20 flex flex-wrap items-center justify-between gap-4">
+<a class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-surface-container-high light-surface-card text-on-surface light-text-main hover:text-primary-container light-gold-text border border-surface-variant/40 font-label-sm text-label-sm font-semibold transition-colors" href="https://wa.me/6281234567890?text=Halo%20Admin%20Jakarta,%20saya%20mau%20tanya%20sewa%20iPhone" target="_blank">
+<span class="material-symbols-outlined text-base text-primary-container light-gold-text">chat</span>
+<span class="">Hubungi Hub Jakarta</span>
+</a>
+<span class="font-label-sm text-label-sm text-primary-fixed-dim light-gold-text">Ready Same-day Courier</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION: FAQ ACCORDION -->
+<section class="w-full py-24 bg-surface-container-lowest light-surface-lowest relative" id="faq">
+<div class="max-w-4xl mx-auto px-6 lg:px-12">
+<div class="text-center space-y-3 mb-16">
+<span class="font-label-sm text-label-sm tracking-widest text-primary-container light-gold-text uppercase font-bold">Bantuan &amp; Regulasi</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface light-text-main font-bold tracking-tight">Pertanyaan yang Sering Diajukan</h2>
+<p class="font-body-md text-body-md text-on-surface-variant light-text-sub">Semua informasi penting seputar syarat, jaminan, dan prosedur sewa di MoSewa.</p>
+</div>
+<!-- FAQ Stack -->
+<div class="space-y-4">
+<!-- FAQ 1 -->
+<details class="group p-6 rounded-2xl bg-surface-container-low light-surface-card border border-surface-variant/30 [&amp;_summary::-webkit-details-marker]:hidden cursor-pointer transition-colors open:bg-surface-container">
+<summary class="flex items-center justify-between gap-4 font-headline-sm text-headline-sm text-on-surface light-text-main font-semibold">
+<span class="">Apa saja syarat untuk menyewa iPhone di MoSewa?</span>
+<span class="material-symbols-outlined text-primary-container light-gold-text transition-transform group-open:rotate-180">expand_more</span>
+</summary>
+<div class="mt-4 pt-4 border-t border-surface-variant/20 font-body-sm text-body-sm text-on-surface-variant light-text-sub leading-relaxed">
+            Persyaratannya sangat ringkas. Cukup sertakan 2 identitas resmi asli yang masih berlaku (misalnya KTP + SIM / Paspor / NPWP / Kartu Mahasiswa / ID Karyawan) serta akun media sosial aktif untuk verifikasi identitas kilat.
+          </div>
+</details>
+<!-- FAQ 2 -->
+<details class="group p-6 rounded-2xl bg-surface-container-low light-surface-card border border-surface-variant/30 [&amp;_summary::-webkit-details-marker]:hidden cursor-pointer transition-colors open:bg-surface-container">
+<summary class="flex items-center justify-between gap-4 font-headline-sm text-headline-sm text-on-surface light-text-main font-semibold">
+<span class="">Apakah ada deposit uang jaminan sebelum sewa?</span>
+<span class="material-symbols-outlined text-primary-container light-gold-text transition-transform group-open:rotate-180">expand_more</span>
+</summary>
+<div class="mt-4 pt-4 border-t border-surface-variant/20 font-body-sm text-body-sm text-on-surface-variant light-text-sub leading-relaxed">
+            Untuk penyewa dengan data verifikasi lengkap dan domisili jelas, MoSewa menyediakan opsi <strong>bebas deposit tunai</strong>. Jika verifikasi identitas membutuhkan jaminan tambahan, deposit yang berlaku bersifat fleksibel dan akan dikembalikan 100% tepat setelah unit selesai diperiksa.
+          </div>
+</details>
+<!-- FAQ 3 -->
+<details class="group p-6 rounded-2xl bg-surface-container-low light-surface-card border border-surface-variant/30 [&amp;_summary::-webkit-details-marker]:hidden cursor-pointer transition-colors open:bg-surface-container">
+<summary class="flex items-center justify-between gap-4 font-headline-sm text-headline-sm text-on-surface light-text-main font-semibold">
+<span class="">Apakah iPhone bisa diantar langsung ke hotel, stasiun, atau venue konser?</span>
+<span class="material-symbols-outlined text-primary-container light-gold-text transition-transform group-open:rotate-180">expand_more</span>
+</summary>
+<div class="mt-4 pt-4 border-t border-surface-variant/20 font-body-sm text-body-sm text-on-surface-variant light-text-sub leading-relaxed">
+            Bisa banget! Di Yogyakarta kami melayani pengantaran ke hotel, homestay, stasiun kereta, maupun bandara YIA. Di Jakarta, tim kurir kami siap menjangkau hotel, kantor, apartemen, atau meeting point di sekitar area konser (GBK, ICE BSD, dsb).
+          </div>
+</details>
+<!-- FAQ 4 -->
+<details class="group p-6 rounded-2xl bg-surface-container-low light-surface-card border border-surface-variant/30 [&amp;_summary::-webkit-details-marker]:hidden cursor-pointer transition-colors open:bg-surface-container">
+<summary class="flex items-center justify-between gap-4 font-headline-sm text-headline-sm text-on-surface light-text-main font-semibold">
+<span class="">Bagaimana jika terjadi keterlambatan pengembalian unit?</span>
+<span class="material-symbols-outlined text-primary-container light-gold-text transition-transform group-open:rotate-180">expand_more</span>
+</summary>
+<div class="mt-4 pt-4 border-t border-surface-variant/20 font-body-sm text-body-sm text-on-surface-variant light-text-sub leading-relaxed">
+            Keterlambatan di atas toleransi waktu 1 jam akan dikenakan biaya overcharge per jam secara transparan sesuai tipe perangkat. Jika ingin memperpanjang durasi (extend), Anda cukup mengonfirmasi admin via WhatsApp minimal 4 jam sebelum masa sewa berakhir.
+          </div>
+</details>
+<!-- FAQ 5 -->
+<details class="group p-6 rounded-2xl bg-surface-container-low light-surface-card border border-surface-variant/30 [&amp;_summary::-webkit-details-marker]:hidden cursor-pointer transition-colors open:bg-surface-container">
+<summary class="flex items-center justify-between gap-4 font-headline-sm text-headline-sm text-on-surface light-text-main font-semibold">
+<span class="">Bagaimana keamanan data pribadi dan foto saya setelah unit dikembalikan?</span>
+<span class="material-symbols-outlined text-primary-container light-gold-text transition-transform group-open:rotate-180">expand_more</span>
+</summary>
+<div class="mt-4 pt-4 border-t border-surface-variant/20 font-body-sm text-body-sm text-on-surface-variant light-text-sub leading-relaxed">
+            Keamanan privasi Anda adalah prioritas utama. Sebelum handover kembali, penyewa diwajibkan sign out iCloud. Setelah unit diterima tim MoSewa, perangkat langsung menjalani prosedur standar <em>Erase All Content and Settings (Factory Reset)</em> di depan Anda atau terdokumentasi sistem.
+          </div>
+</details>
+</div>
+</div>
+</section>
+<!-- SECTION: FINAL CTA -->
+<section class="w-full py-20 bg-surface relative overflow-hidden">
+<div class="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
+<div class="relative rounded-3xl bg-gradient-to-r from-surface-container-high via-surface-container-lowest to-[#02041D] light-surface-card p-10 lg:p-16 border border-primary-container/30 shadow-[0_20px_50px_rgba(0,0,0,0.7)] overflow-hidden">
+<!-- Ambient Gold Glow in CTA -->
+<div class="absolute -right-20 -bottom-20 w-96 h-96 bg-primary-container/15 blur-[100px] pointer-events-none rounded-full"></div>
+<div class="max-w-2xl space-y-6 relative z-10">
+<div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-primary-container/20 light-badge border border-primary-container/40 text-primary-container light-gold-text font-label-sm text-label-sm font-semibold">
+<span class="material-symbols-outlined text-sm">bolt</span>
+<span class="">Reservasi Cepat &amp; Garansi Unit Siap</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface light-text-main font-bold tracking-tight">
+            Siap Menikmati iPhone Favoritmu?
+          </h2>
+<p class="font-body-md text-body-md text-on-surface-variant light-text-sub leading-relaxed">
+            Konsultasikan kebutuhan iPhone untuk konser, liburan, wedding, atau pekerjaanmu sekarang juga bersama tim VIP Concierge MoSewa.
+          </p>
+<div class="pt-4 flex flex-wrap items-center gap-4">
+<a class="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-gradient-to-r from-primary-fixed via-primary-container to-tertiary-container text-on-primary font-label-lg text-label-lg font-bold shadow-[0_0_30px_rgba(246,197,95,0.35)] hover:shadow-[0_0_45px_rgba(246,197,95,0.55)] transition-all" href="https://wa.me/6281234567890?text=Halo%20MoSewa,%20saya%20ingin%20sewa%20iPhone%20sekarang" target="_blank">
+<span class="material-symbols-outlined text-xl">chat</span>
+<span class="">Sewa Sekarang via WhatsApp</span>
+</a>
+<div class="flex items-center gap-2 text-xs text-on-surface-variant light-text-sub">
+<span class="material-symbols-outlined text-primary-container light-gold-text text-sm">support_agent</span>
+<span class="">Customer Care Standby 24/7</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<script>
+  // Theme Toggle Logic (Dark/Light with localStorage persistence)
+  const themeToggleBtn = document.getElementById('theme-toggle');
+  const rootHtml = document.documentElement;
+
+  // Retrieve user preference or system preference
+  const savedTheme = localStorage.getItem('mosewa-theme');
+  if (savedTheme === 'light') {
+    rootHtml.classList.remove('dark');
+  } else if (savedTheme === 'dark') {
+    rootHtml.classList.add('dark');
+  } else {
+    // Default mode: dark
+    rootHtml.classList.add('dark');
+  }
+
+  if (themeToggleBtn) {
+    themeToggleBtn.addEventListener('click', () => {
+      const isDark = rootHtml.classList.contains('dark');
+      if (isDark) {
+        rootHtml.classList.remove('dark');
+        localStorage.setItem('mosewa-theme', 'light');
+      } else {
+        rootHtml.classList.add('dark');
+        localStorage.setItem('mosewa-theme', 'dark');
+      }
+    });
+  }
+
+  // City quick toggle UI micro-interaction
+  const btnAll = document.getElementById('loc-all');
+  const btnJog = document.getElementById('loc-jog');
+  const btnJkt = document.getElementById('loc-jkt');
+
+  const activeClasses = ['bg-surface-container-high', 'text-primary-container', 'shadow-sm', 'light-badge'];
+  const inactiveClasses = ['text-on-surface-variant', 'light-text-sub'];
+
+  function setCityActive(activeBtn, others) {
+    if(!activeBtn) return;
+    activeBtn.classList.remove(...inactiveClasses);
+    activeBtn.classList.add(...activeClasses);
+
+    others.forEach(btn => {
+      if(btn) {
+        btn.classList.remove(...activeClasses);
+        btn.classList.add(...inactiveClasses);
+      }
+    });
+  }
+
+  if(btnAll && btnJog && btnJkt) {
+    btnAll.addEventListener('click', () => setCityActive(btnAll, [btnJog, btnJkt]));
+    btnJog.addEventListener('click', () => setCityActive(btnJog, [btnAll, btnJkt]));
+    btnJkt.addEventListener('click', () => setCityActive(btnJkt, [btnAll, btnJog]));
+  }
+</script></main><footer class="w-full bg-surface-container-lowest light-footer border-t border-surface-variant/20 pt-16 pb-12 text-on-surface-variant light-text-sub"><div class="max-w-7xl mx-auto px-6 lg:px-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12"><div class="space-y-4"><div class="flex items-center gap-2"><span class="font-headline-md text-headline-md tracking-tight text-primary light-brand-title font-bold">MoSewa</span></div><p class="font-body-sm text-body-sm text-on-surface-variant light-text-sub leading-relaxed">Platform rental flagship iPhone berstandar concierge eksklusif untuk kreator konten, profesional, dan traveler di Yogyakarta &amp; Jakarta.</p><div class="pt-2"><span class="inline-flex items-center gap-1.5 font-label-sm text-label-sm text-primary-fixed-dim light-gold-text bg-surface-container-high/60 light-badge px-3 py-1 rounded-full"><span class="material-symbols-outlined text-sm">verified</span>100% Original Battery Health &gt;88%</span></div></div><div><h4 class="font-headline-sm text-headline-sm text-on-surface light-text-main font-semibold mb-4">Navigasi</h4><ul class="space-y-3 font-body-sm text-body-sm"><li class=""><a class="hover:text-primary light-gold-text transition-colors" data-path="beranda" href="#">Beranda</a></li><li class=""><a class="hover:text-primary light-gold-text transition-colors" data-path="katalog" href="#">Katalog iPhone Flagship</a></li><li class=""><a class="hover:text-primary light-gold-text transition-colors" data-path="cara-sewa" href="#">Prosedur &amp; Syarat Sewa</a></li><li class=""><a class="hover:text-primary light-gold-text transition-colors" data-path="lokasi" href="#">Lokasi Hub Yogyakarta &amp; Jakarta</a></li><li class=""><a class="hover:text-primary light-gold-text transition-colors" data-path="faq" href="#">Pertanyaan Umum (FAQ)</a></li></ul></div><div><h4 class="font-headline-sm text-headline-sm text-on-surface light-text-main font-semibold mb-4">Hub Operasional</h4><ul class="space-y-4 font-body-sm text-body-sm"><li class=""><p class="text-on-surface light-text-main font-medium">Hub Yogyakarta</p><p class="text-xs text-on-surface-variant/80 light-text-sub">Jl. Kaliurang KM 5, Sleman (Dekat UGM)</p><p class="text-xs text-primary-fixed-dim light-gold-text">Layanan Antar/Jemput &amp; On-Site Pickup</p></li><li class=""><p class="text-on-surface light-text-main font-medium">Hub Jakarta</p><p class="text-xs text-on-surface-variant/80 light-text-sub">SCBD Lot 8, Senayan, Jakarta Selatan</p><p class="text-xs text-primary-fixed-dim light-gold-text">Express Concierge Courier &amp; VIP Handover</p></li></ul></div><div><h4 class="font-headline-sm text-headline-sm text-on-surface light-text-main font-semibold mb-4">Layanan Concierge</h4><p class="font-body-sm text-body-sm mb-4 leading-relaxed light-text-sub">Konsultasikan kebutuhan perangkat, tipe penyimpanan, dan jadwal sewa bersama tim VIP Support kami.</p><a class="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-surface-container-high light-surface-card text-on-surface light-text-main hover:text-primary transition-colors border border-surface-variant/40" data-path="katalog" href="#"><span class="material-symbols-outlined text-primary-container light-gold-text text-base">support_agent</span><span class="font-label-md text-label-md font-medium">WhatsApp Concierge 24/7</span></a></div></div><div class="max-w-7xl mx-auto px-6 lg:px-12 mt-12 pt-8 border-t border-surface-variant/20 flex flex-col md:flex-row items-center justify-between gap-4 text-xs light-text-sub"><p class="">© 2025 MoSewa Flagship Rental Ecosystem. Seluruh hak cipta dilindungi.</p><div class="flex items-center gap-6"><span class="">Ketentuan Privasi</span><span class="">Syarat Layanan</span><span class="">Jaminan Proteksi Unit</span></div></div></footer>
+</body></html>
