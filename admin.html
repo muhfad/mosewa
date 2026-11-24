@@ -49,11 +49,11 @@ td{padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:middle}t
 <!-- Mulai → login -->
 <div class="login" id="login"><form class="lcard" id="lform" novalidate>
   <div class="brand">Mo<i>sewa</i> Admin</div><small>Masuk untuk mengelola website Mosewa.</small>
-  <label class="f" for="u">Username</label><input class="in" id="u" autocomplete="username"/>
+  <label class="f" for="u">Email</label><input class="in" id="u" autocomplete="username"/>
   <label class="f" for="p">Password</label><input class="in" id="p" type="password" autocomplete="current-password"/>
-  <div class="alert" id="lerr" hidden>Login gagal: username atau password salah. Silakan ulangi.</div>
+  <div class="alert" id="lerr" hidden>Login gagal: email atau password salah. Silakan ulangi.</div>
   <button class="btn gold" style="width:100%;justify-content:center;margin-top:20px;padding:12px">Masuk</button>
-  <p style="font-size:12px;color:var(--muted);margin:14px 0 0">Prototipe: <b>admin</b> / <b>admin123</b>. Akan diganti autentikasi server saat backend siap.</p>
+  <p style="font-size:12px;color:var(--muted);margin:14px 0 0">Prototipe: <b>admin@mosewa.id</b> / <b>admin123</b>. Akan diganti autentikasi server (hash bcrypt/argon2) saat backend siap.</p>
 </form></div>
 
 <div id="app" hidden>
@@ -63,14 +63,14 @@ td{padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:middle}t
     <button class="nav" id="rst"><span class="ms">restart_alt</span>Reset data contoh</button>
     <button class="nav" id="out"><span class="ms">logout</span>Logout</button></aside>
   <div class="main"><div class="top"><div class="row"><button class="btn sm burger" id="bg"><span class="ms">menu</span></button><b id="ttl"></b></div>
-    <div class="row"><small>Masuk sebagai <b>admin</b></small><a class="btn sm" href="index.html" target="_blank"><span class="ms">open_in_new</span>Lihat website</a></div></div>
+    <div class="row"><small id="who"></small><a class="btn sm" href="index.html" target="_blank"><span class="ms">open_in_new</span>Lihat website</a></div></div>
     <div id="view"></div></div>
 </div>
 <div class="modal" id="modal" hidden><form class="mbox" id="mform" novalidate></form></div>
 <div id="toast" hidden></div>
 
 <script>
-const LS='mosewa-admin-db',$=(s,e=document)=>e.querySelector(s),$$=(s,e=document)=>[...e.querySelectorAll(s)];
+const LS='mosewa-admin-db-v2',$=(s,e=document)=>e.querySelector(s),$$=(s,e=document)=>[...e.querySelectorAll(s)];
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const rp=n=>'Rp '+Number(n).toLocaleString('id-ID'),slug=s=>s.toLowerCase().trim().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
 const U='https://images.unsplash.com/';
@@ -81,9 +81,11 @@ function seed(){const L=(id,c,m,a,p,f,img)=>({id,city_id:c,device_model_id:m,is_
  listings:[],listing_prices:[],listing_images:[],
  testimonials:[['Amanda R.',2,'Sewa iPhone 16 Pro buat konser di Jakarta. Unit mulus 100%, baterai awet seharian dipakai rekam 4K.'],['Dimas K.',1,'Nyewa iPhone 15 Pro Max pas liburan 4 hari ke Jogja. Hasil foto jernih, antar jemput tepat waktu.'],['Fakhri N.',1,'Sangat terbantu buat project reels & video company profile. Syarat mudah dan transparan.']].map(([n,c,t],i)=>({id:i+1,city_id:c,display_name:n,content:t,is_published:true,sort_order:i+1})),
  faqs:[['Apa saja syarat untuk menyewa iPhone di Mosewa?','Sertakan 2 identitas resmi asli yang masih berlaku serta akun media sosial aktif untuk verifikasi.'],['Apakah ada deposit uang jaminan sebelum sewa?','Tersedia opsi bebas deposit tunai bagi penyewa dengan verifikasi lengkap.'],['Apakah iPhone bisa diantar ke hotel, stasiun, atau venue konser?','Bisa, sesuai area layanan cabang.'],['Bagaimana jika terjadi keterlambatan pengembalian unit?','Toleransi 1 jam; setelahnya dikenakan biaya overcharge per jam. Perpanjangan via WhatsApp minimal 4 jam sebelum sewa berakhir.'],['Bagaimana keamanan data pribadi setelah unit dikembalikan?','Penyewa sign out iCloud, lalu unit di-factory reset di depan penyewa.']].map(([q,a],i)=>({id:i+1,question:q,answer:a,is_published:true,sort_order:i+1})),
- contents:[['hero_heading','Heading hero','Memorable Moments. Premium Experience.'],['hero_subheading','Subheading hero','Abadikan konser, liburan, dan setiap momen spesial dengan iPhone yang sesuai kebutuhanmu.'],['closing_quote','Kalimat penutup','Momen-nya mungkin cuman sekali dan tidak selalu terulang kembali. Pastikan kamera HP-mu ready untuk mengabadikan setiap momen berharga untuk kamu kenang kembali.']].map(([k,l,v],i)=>({id:i+1,key:k,label:l,value:v}))};
+ page_sections:[['home','hero','Memorable Moments. Premium Experience.','Abadikan konser, liburan, dan setiap momen spesial dengan iPhone yang sesuai kebutuhanmu.'],['home','momen','Momenmu Layak Diabadikan dengan Sempurna.','Ada momen yang hanya datang sekali. Pastikan kamu punya cara terbaik untuk menyimpannya.'],['home','tentang','WE’RE MOSEWA.','Kami hadir untuk membantumu mengabadikan setiap momen penting dengan pengalaman sewa iPhone yang praktis dan nyaman.'],['home','penutup','Booking unit-mu sekarang, hubungi kami via WA','Momen-nya mungkin cuman sekali dan tidak selalu terulang kembali. Pastikan kamera HP-mu ready untuk mengabadikan setiap momen berharga untuk kamu kenang kembali.']].map(([p,k,t,b],i)=>({id:i+1,page_key:p,section_key:k,title:t,body:b,media_path:'',sort_order:i+1})),
+ site_settings:[['site_name','Mosewa'],['company_legal','PT Jokam Sembilan Sembilan'],['default_whatsapp','6281234567890']].map(([k,v],i)=>({id:i+1,key:k,value:v})),
+ admins:[{id:1,name:'Admin Mosewa',email:'admin@mosewa.id',password_hash:'240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9',role:'superadmin'}]};
  [[1,1,1,'photo-1739617357263-634f94806fbe',295],[1,2,0,'photo-1726587912121-ea21fcc57ff8',245],[2,3,0,'photo-1761435922632-424d1dc46102',210],[1,4,0,'photo-1737280423340-a3dcb0f4c1d0',140]].forEach(([c,m,f,im,p],i)=>{const id=i+1;
-  d.listings.push({id,city_id:c,device_model_id:m,is_available:true,is_published:true,is_featured:!!f});
+  d.listings.push({id,city_id:c,device_model_id:m,description:'Unit terawat, baterai sehat, lengkap box, kabel, adaptor fast-charging, dan clear case.',is_available:true,is_published:true,is_featured:!!f});
   [[6,.45],[12,.65],[24,1]].forEach(([h,k],j)=>d.listing_prices.push({id:id*10+j,listing_id:id,duration_hours:h,price_rupiah:Math.round(p*k/5)*5000,is_active:true}));
   d.listing_images.push({id:id,listing_id:id,image_path:U+im+'?auto=format&fit=crop&w=400&q=70',sort_order:1})});return d}
 let db;try{db=JSON.parse(localStorage.getItem(LS))}catch(e){}db=db||seed();
@@ -99,7 +101,7 @@ const opt=(t,f)=>()=>db[t].filter(f||(()=>1)).map(r=>[r.id,r.name]);
 const M={
  listings:{t:'Katalog Unit',ic:'smartphone',add:'Tambah unit',
   cols:[['Foto',r=>firstImg(r.id)],['Unit',r=>`<b>${esc(nm('device_models',r.device_model_id))}</b><br><small>${esc(nm('cities',r.city_id))}</small>`],['Harga (6/12/24 jam)',r=>prices(r.id)],['Foto',r=>db.listing_images.filter(i=>i.listing_id==r.id).length],['Tersedia',r=>sw('listings','is_available',r)],['Unggulan',r=>sw('listings','is_featured',r)],['Status',r=>pub('listings',r)]],
-  fields:[{k:'city_id',l:'Cabang (cities)',type:'select',req:1,opts:opt('cities')},{k:'device_model_id',l:'Model perangkat',type:'select',req:1,opts:opt('device_models')},{k:'prices',l:'Harga sewa (listing_prices)',type:'prices'},{k:'images',l:'Foto unit (listing_images)',type:'images'},{k:'is_available',l:'Unit tersedia',type:'bool',def:1},{k:'is_featured',l:'Unggulan',type:'bool'},{k:'is_published',l:'Dipublikasikan di website',type:'bool'}]},
+  fields:[{k:'city_id',l:'Cabang (cities)',type:'select',req:1,opts:opt('cities')},{k:'device_model_id',l:'Model perangkat',type:'select',req:1,opts:opt('device_models')},{k:'description',l:'Deskripsi unit',type:'textarea'},{k:'prices',l:'Harga sewa (listing_prices)',type:'prices'},{k:'images',l:'Foto unit (listing_images)',type:'images'},{k:'is_available',l:'Unit tersedia',type:'bool',def:1},{k:'is_featured',l:'Unggulan',type:'bool'},{k:'is_published',l:'Dipublikasikan di website',type:'bool'}]},
  device_models:{t:'Model Perangkat',ic:'phone_iphone',add:'Tambah model',
   cols:[['Nama',r=>`<b>${esc(r.name)}</b><br><small>${esc(r.slug)}</small>`],['Deskripsi',r=>esc(r.description)],['Dipakai',r=>db.listings.filter(l=>l.device_model_id==r.id).length+' unit'],['Aktif',r=>sw('device_models','is_active',r)]],
   fields:[{k:'name',l:'Nama model',type:'text',req:1},{k:'slug',l:'Slug (otomatis jika kosong)',type:'text',slug:1},{k:'description',l:'Deskripsi',type:'textarea'},{k:'is_active',l:'Aktif',type:'bool',def:1}]},
@@ -110,26 +112,40 @@ const M={
  testimonials:{t:'Review Pelanggan',ic:'reviews',add:'Tambah review',
   cols:[['Nama',r=>`<b>${esc(r.display_name)}</b><br><small>${esc(r.city_id?nm('cities',r.city_id):'Umum')}</small>`],['Isi review',r=>esc(r.content.slice(0,90))+(r.content.length>90?'…':'')],['Urutan',r=>r.sort_order],['Status',r=>pub('testimonials',r)]],
   fields:[{k:'display_name',l:'Nama tampilan',type:'text',req:1},{k:'city_id',l:'Cabang (opsional)',type:'select',opts:opt('cities'),blank:'Umum / semua cabang'},{k:'content',l:'Isi review',type:'textarea',req:1,min:10},{k:'sort_order',l:'Urutan tampil',type:'number',def:1},{k:'is_published',l:'Dipublikasikan',type:'bool',def:1}]},
- faqs:{t:'FAQ',ic:'help',add:'Tambah FAQ',extra:1,
+ faqs:{t:'FAQ',ic:'help',add:'Tambah FAQ',
   cols:[['Pertanyaan',r=>`<b>${esc(r.question)}</b>`],['Urutan',r=>r.sort_order],['Status',r=>pub('faqs',r)]],
   fields:[{k:'question',l:'Pertanyaan',type:'text',req:1},{k:'answer',l:'Jawaban',type:'textarea',req:1},{k:'sort_order',l:'Urutan tampil',type:'number',def:1},{k:'is_published',l:'Dipublikasikan',type:'bool',def:1}]},
- contents:{t:'Konten Situs',ic:'edit_note',add:'Tambah konten',extra:1,
-  cols:[['Bagian',r=>`<b>${esc(r.label)}</b><br><small>${esc(r.key)}</small>`],['Isi',r=>esc(r.value.slice(0,110))+(r.value.length>110?'…':'')]],
-  fields:[{k:'key',l:'Kunci (unik, huruf kecil & _)',type:'text',req:1},{k:'label',l:'Label',type:'text',req:1},{k:'value',l:'Isi konten',type:'textarea',req:1}],
-  v:(v,e)=>{if(v.key&&!/^[a-z0-9_]+$/.test(v.key))e.key='Hanya huruf kecil, angka, dan underscore.'}}};
+ page_sections:{t:'Bagian Halaman',ic:'view_quilt',add:'Tambah bagian',
+  cols:[['Halaman / bagian',r=>`<b>${esc(r.page_key)} / ${esc(r.section_key)}</b>`],['Judul',r=>esc(r.title)],['Isi',r=>esc((r.body||'').slice(0,90))+((r.body||'').length>90?'…':'')],['Media',r=>r.media_path?`<img class="thumb" src="${esc(r.media_path)}" alt=""/>`:'<small>—</small>'],['Urutan',r=>r.sort_order]],
+  fields:[{k:'page_key',l:'Halaman (page_key)',type:'text',req:1,hint:'Contoh: home, artikel'},{k:'section_key',l:'Bagian (section_key)',type:'text',req:1,hint:'Contoh: hero, momen, tentang, penutup'},{k:'title',l:'Judul',type:'text'},{k:'body',l:'Isi / teks',type:'textarea'},{k:'media_path',l:'Path / URL media (gambar)',type:'text'},{k:'sort_order',l:'Urutan tampil',type:'number',def:1}],
+  v:(v,e,id)=>{['page_key','section_key'].forEach(f=>{if(v[f]&&!/^[a-z0-9_-]+$/.test(v[f]))e[f]='Hanya huruf kecil, angka, - atau _.'});if(v.page_key&&v.section_key&&db.page_sections.some(r=>r.page_key===v.page_key&&r.section_key===v.section_key&&r.id!=id))e.section_key='Kombinasi halaman + bagian sudah ada.'}},
+ site_settings:{t:'Pengaturan Situs',ic:'settings',add:'Tambah pengaturan',admin:1,
+  cols:[['Key (PK)',r=>`<b>${esc(r.key)}</b>`],['Value',r=>esc(String(r.value).slice(0,120))]],
+  fields:[{k:'key',l:'Key (unik, PK)',type:'text',req:1},{k:'value',l:'Value',type:'textarea'}],
+  v:(v,e,id)=>{if(v.key&&!/^[a-z0-9_]+$/.test(v.key))e.key='Hanya huruf kecil, angka, dan underscore.';else if(db.site_settings.some(r=>r.key===v.key&&r.id!=id))e.key='Key sudah dipakai.'}},
+ admins:{t:'Admin & Akses',ic:'admin_panel_settings',add:'Tambah admin',admin:1,
+  cols:[['Nama',r=>`<b>${esc(r.name)}</b><br><small>${esc(r.email)}</small>`],['Role',r=>`<span class="badge ${r.role==='superadmin'?'':'x'}">${esc(r.role)}</span>`],['Password',r=>'<small>••••••••</small>']],
+  fields:[{k:'name',l:'Nama',type:'text',req:1},{k:'email',l:'Email',type:'text',req:1},{k:'role',l:'Role',type:'select',req:1,str:1,opts:()=>[['superadmin','superadmin — akses penuh'],['editor','editor — kelola katalog & konten']]},{k:'password',l:'Password (yang disimpan hanya password_hash)',type:'password',hint:'Saat ubah data, kosongkan jika password tidak diganti. Minimal 8 karakter.'}],
+  v:(v,e,id)=>{if(v.email&&!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v.email))e.email='Format email tidak valid.';else if(v.email&&db.admins.some(a=>a.email.toLowerCase()===v.email.toLowerCase()&&a.id!=id))e.email='Email sudah terdaftar.';
+   if(!id&&!v.password)e.password='Wajib diisi untuk admin baru.';else if(v.password&&v.password.length<8)e.password='Minimal 8 karakter.';
+   const o=db.admins.find(a=>a.id==id);if(o&&o.role==='superadmin'&&v.role!=='superadmin'&&!db.admins.some(a=>a.id!=id&&a.role==='superadmin'))e.role='Harus ada minimal satu superadmin.'}}};
 /* ===== Login / sesi ===== */
-const authed=()=>sessionStorage.getItem('mosewa-admin')==='1';
-function gate(){$('#login').hidden=authed();$('#app').hidden=!authed();if(authed())route()}
-$('#lform').onsubmit=e=>{e.preventDefault();if($('#u').value.trim()==='admin'&&$('#p').value==='admin123'){sessionStorage.setItem('mosewa-admin','1');$('#lerr').hidden=true;$('#p').value='';gate()}else $('#lerr').hidden=false};
+const sha=async x=>[...new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(x)))].map(b=>b.toString(16).padStart(2,'0')).join('');
+const me=()=>db.admins.find(a=>a.id==sessionStorage.getItem('mosewa-admin'))||{},authed=()=>!!me().id;
+function gate(){$('#login').hidden=authed();$('#app').hidden=!authed();if(authed()){buildNav();route()}}
+$('#lform').onsubmit=async e=>{e.preventDefault();const a=db.admins.find(x=>x.email.toLowerCase()===$('#u').value.trim().toLowerCase());let ok=false;try{ok=!!a&&a.password_hash===await sha($('#p').value)}catch(x){toast('Hashing butuh https atau localhost.')}
+ if(ok){sessionStorage.setItem('mosewa-admin',a.id);$('#lerr').hidden=true;$('#p').value='';gate()}else $('#lerr').hidden=false};
 $('#out').onclick=()=>{sessionStorage.removeItem('mosewa-admin');location.hash='';gate();toast('Sesi berakhir.')};
 $('#exp').onclick=()=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(db,null,2)],{type:'application/json'}));a.download='mosewa-data.json';a.click()};
-$('#rst').onclick=()=>{if(confirm('Kembalikan semua data ke data contoh? Perubahanmu akan hilang.')){db=seed();save();route();toast('Data contoh dipulihkan.')}};
+$('#rst').onclick=()=>{if(confirm('Kembalikan semua data ke data contoh? Perubahanmu akan hilang.')){db=seed();save();gate();toast('Data contoh dipulihkan.')}};
 $('#bg').onclick=()=>$('#side').classList.toggle('open');
 /* ===== Pilih modul ===== */
-$('#nav').innerHTML=`<button class="nav" data-m="dashboard"><span class="ms">dashboard</span>Ringkasan</button><small>Modul pengelolaan</small>`+['listings','device_models','cities','testimonials'].map(k=>`<button class="nav" data-m="${k}"><span class="ms">${M[k].ic}</span>${M[k].t}</button>`).join('')+`<small>Konten tambahan</small>`+['faqs','contents'].map(k=>`<button class="nav" data-m="${k}"><span class="ms">${M[k].ic}</span>${M[k].t}</button>`).join('');
-$$('.nav[data-m]').forEach(b=>b.onclick=()=>{location.hash='#/'+b.dataset.m;$('#side').classList.remove('open')});
+function buildNav(){const adm=me().role==='superadmin',g=(h,ks)=>`<small>${h}</small>`+ks.filter(k=>adm||!M[k].admin).map(k=>`<button class="nav" data-m="${k}"><span class="ms">${M[k].ic}</span>${M[k].t}</button>`).join('');
+ $('#nav').innerHTML=`<button class="nav" data-m="dashboard"><span class="ms">dashboard</span>Ringkasan</button>`+g('Data katalog &amp; listing',['listings','device_models','cities'])+g('Konten, pengaturan &amp; akses admin',['testimonials','faqs','page_sections','site_settings','admins']);
+ $$('.nav[data-m]').forEach(b=>b.onclick=()=>{location.hash='#/'+b.dataset.m;$('#side').classList.remove('open')});
+ $('#who').innerHTML=`Masuk sebagai <b>${esc(me().name)}</b> · ${esc(me().role)}`}
 let q='';
-function route(){const k=(location.hash.match(/^#\/(\w+)/)||[])[1]||'dashboard';$$('.nav[data-m]').forEach(b=>b.classList.toggle('on',b.dataset.m===k));$('#ttl').textContent=k==='dashboard'?'Ringkasan':M[k].t;q='';k==='dashboard'?dash():table(k)}
+function route(){let k=(location.hash.match(/^#\/(\w+)/)||[])[1]||'dashboard';if(k!=='dashboard'&&(!M[k]||(M[k].admin&&me().role!=='superadmin')))k='dashboard';$$('.nav[data-m]').forEach(b=>b.classList.toggle('on',b.dataset.m===k));$('#ttl').textContent=k==='dashboard'?'Ringkasan':M[k].t;q='';k==='dashboard'?dash():table(k)}
 window.onhashchange=()=>authed()&&route();
 function dash(){const L=db.listings,w=[];
  L.filter(l=>l.is_published&&!db.listing_prices.some(p=>p.listing_id==l.id&&p.is_active)).forEach(l=>w.push(`Unit <b>${esc(nm('device_models',l.device_model_id))}</b> (${esc(nm('cities',l.city_id))}) dipublikasikan tanpa harga aktif.`));
@@ -147,6 +163,7 @@ function table(k){const m=M[k],rows=db[k].filter(r=>!q||JSON.stringify(r).toLowe
  $$('[data-tg]').forEach(b=>b.onclick=()=>{const[t,id,f]=b.dataset.tg.split('|'),r=db[t].find(x=>x.id==id);r[f]=!r[f];if(save()){table(k);toast(f==='is_published'?(r[f]?'Dipublikasikan — tampil di website.':'Dijadikan draf — disembunyikan dari website.'):'Perubahan disimpan.')}})}
 function del(k,id){const r=db[k].find(x=>x.id==id),use=k==='cities'?db.listings.some(l=>l.city_id==id):k==='device_models'?db.listings.some(l=>l.device_model_id==id):0;
  if(use)return toast('Tidak bisa dihapus: masih dipakai oleh unit di katalog. Nonaktifkan saja.');
+ if(k==='admins'){if(id==me().id)return toast('Tidak bisa menghapus akun yang sedang dipakai.');if(r.role==='superadmin'&&db.admins.filter(a=>a.role==='superadmin').length<2)return toast('Minimal harus ada satu superadmin.')}
  if(!confirm('Hapus data ini? Tindakan tidak dapat dibatalkan.'))return;db[k]=db[k].filter(x=>x.id!=id);if(k==='listings'){db.listing_prices=db.listing_prices.filter(p=>p.listing_id!=id);db.listing_images=db.listing_images.filter(p=>p.listing_id!=id)}if(save()){table(k);toast('Data dihapus.')}}
 /* ===== Form tambah/ubah + validasi ===== */
 const img2url=f=>new Promise((ok,no)=>{const r=new FileReader();r.onload=()=>{const i=new Image();i.onload=()=>{const s=Math.min(1,640/i.width),c=document.createElement('canvas');c.width=i.width*s;c.height=i.height*s;c.getContext('2d').drawImage(i,0,0,c.width,c.height);ok(c.toDataURL('image/jpeg',.72))};i.onerror=no;i.src=r.result};r.onerror=no;r.readAsDataURL(f)});
@@ -166,8 +183,8 @@ function form(k,id){const m=M[k],row=id?db[k].find(r=>r.id==id):{},D={imgs:[],pr
  const ri=()=>{const b=$('#imgs');if(!b)return;b.innerHTML=D.imgs.map((s,i)=>`<div class="img"><img class="thumb" src="${esc(s)}" alt=""/><span>${i?'':'<b>Utama</b> · '}${esc(s.startsWith('data:')?'(file unggahan)':s)}</span><button type="button" class="btn sm" data-u="${i}">↑</button><button type="button" class="btn sm danger" data-x="${i}">✕</button></div>`).join('');$$('[data-u]',b).forEach(x=>x.onclick=()=>{const i=+x.dataset.u;if(i)[D.imgs[i-1],D.imgs[i]]=[D.imgs[i],D.imgs[i-1]];ri()});$$('[data-x]',b).forEach(x=>x.onclick=()=>{D.imgs.splice(+x.dataset.x,1);ri()})};ri();
  if($('#imgf'))$('#imgf').onchange=async e=>{const er=$('[data-e=images]');er.hidden=true;for(const f of e.target.files){if(!/^image\/(jpeg|png|webp)$/.test(f.type)||f.size>3*1048576){er.textContent=`“${f.name}” ditolak: hanya JPG/PNG/WEBP dan maks 3 MB.`;er.hidden=false;continue}try{D.imgs.push(await img2url(f))}catch(x){er.textContent=`“${f.name}” bukan gambar yang valid.`;er.hidden=false}}e.target.value='';ri()};
  if($('#imga'))$('#imga').onclick=()=>{const u=$('#imgu').value.trim();if(u){D.imgs.push(u);$('#imgu').value='';ri()}};
- $('#mform').onsubmit=e=>{e.preventDefault();const V={},Er={};
-  m.fields.forEach(f=>{if(f.type==='prices'||f.type==='images')return;const el=$(`[name=${f.k}]`);let v=f.type==='bool'?el.checked:el.value.trim();if(f.type==='number')v=v===''?0:Number(v);if(f.type==='select')v=v===''?null:Number(v);V[f.k]=v;
+ $('#mform').onsubmit=async e=>{e.preventDefault();const V={},Er={};
+  m.fields.forEach(f=>{if(f.type==='prices'||f.type==='images')return;const el=$(`[name=${f.k}]`);let v=f.type==='bool'?el.checked:el.value.trim();if(f.type==='number')v=v===''?0:Number(v);if(f.type==='select')v=v===''?null:(f.str?v:Number(v));V[f.k]=v;
    if(f.req&&(v===''||v===null))Er[f.k]='Wajib diisi.';else if(f.min&&String(v).length<f.min)Er[f.k]=`Minimal ${f.min} karakter.`});
   const sl=m.fields.find(f=>f.slug);if(sl){V.slug=V.slug||slug(V.name||'');if(!/^[a-z0-9-]+$/.test(V.slug))Er.slug='Slug hanya huruf kecil, angka, dan tanda minus.';else if(db[k].some(r=>r.slug===V.slug&&r.id!=id))Er.slug='Slug sudah dipakai.'}
   if(k==='contents'&&V.key&&db[k].some(r=>r.key===V.key&&r.id!=id))Er.key='Kunci sudah dipakai.';
@@ -175,9 +192,10 @@ function form(k,id){const m=M[k],row=id?db[k].find(r=>r.id==id):{},D={imgs:[],pr
    if(pr.some(x=>x.p!==null&&(!Number.isInteger(x.p)||x.p<=0)))Er.prices='Harga harus bilangan bulat lebih dari 0.';else if(pr.some(x=>x.a&&x.p===null))Er.prices='Harga yang diaktifkan wajib diisi.';else if(V.is_published&&!pr.some(x=>x.a))Er.prices='Unit yang dipublikasikan butuh minimal 1 harga aktif.';
    if(V.is_published&&!D.imgs.length)Er.images='Unit yang dipublikasikan butuh minimal 1 foto.';
    if(V.city_id&&V.device_model_id&&db.listings.some(l=>l.city_id==V.city_id&&l.device_model_id==V.device_model_id&&l.id!=id))Er.device_model_id='Unit model ini sudah ada di cabang tersebut.';V._pr=pr}
-  if(m.v)m.v(V,Er);
+  if(m.v)m.v(V,Er,id);
   $$('.in.bad').forEach(x=>x.classList.remove('bad'));$$('[data-e]').forEach(x=>x.hidden=true);
   if(Object.keys(Er).length){Object.entries(Er).forEach(([f,t])=>{const e=$(`[data-e=${f}]`);if(e){e.textContent=t;e.hidden=false}const i=$(`[name=${f}]`);if(i)i.classList.add('bad')});$('#sum').hidden=false;$('.mb').scrollTop=0;return}
+  if(k==='admins'){if(V.password)V.password_hash=await sha(V.password);delete V.password}
   const pr=V._pr;delete V._pr;let r=row;if(id)Object.assign(r,V);else{r={id:uid(),...V};db[k].push(r)}
   if(k==='listings'){db.listing_prices=db.listing_prices.filter(p=>p.listing_id!=r.id);pr.filter(x=>x.p!==null).forEach(x=>db.listing_prices.push({id:uid(),listing_id:r.id,duration_hours:x.h,price_rupiah:x.p,is_active:x.a}));db.listing_images=db.listing_images.filter(p=>p.listing_id!=r.id);D.imgs.forEach((s,i)=>db.listing_images.push({id:uid(),listing_id:r.id,image_path:s,sort_order:i+1}))}
   if(save()){close();route();toast('Tersimpan. Perubahan tampil di website sesuai status publikasi.')}}}
